@@ -23,7 +23,13 @@
     "noImplicitAny": true,
     "baseUrl": ".",
     "paths": {
-      "src/*": ["src/*"]
+      // "src/*": ["src/*"]
+      "@components/*": ["src/components/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@services/*": ["src/services/*"],
+      "@assets/*": ["src/assets/*"],
+      "@types/*": ["src/types/*"],
+      "@view/*": ["src/view/*"]
     }
   },
   "include": ["src"],

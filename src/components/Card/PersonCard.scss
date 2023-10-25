@@ -1,0 +1,27 @@
+.person-cards {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.person-card {
+  min-width: 200px;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+
+  span {
+    font-weight: bold;
+  }
+
+  &__name {
+    // max-width: 180px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+  }
+}
