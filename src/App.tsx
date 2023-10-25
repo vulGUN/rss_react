@@ -3,6 +3,7 @@ import CardsService from '@services/CardsService';
 import StorageService from '@services/StorageService';
 import PersonCard from '@components/PersonalCard/PersonCard';
 import Search from '@components/Search/Search';
+import Loader from '@components/Loader/Loader';
 import { IAppState } from 'src/types';
 
 const CARDS_SERVICE = new CardsService();
@@ -14,12 +15,18 @@ export default class App extends React.Component<object, IAppState> {
     this.state = {
       input: STORAGE_SERVICE.getSearchData() || '',
       people: [],
+      isLoad: true,
     };
   }
+
+  setIsLoad = (value: boolean) => {
+    this.setState({ isLoad: value });
+  };
 
   handleSearch = async () => {
     const { results } = await CARDS_SERVICE.getCards(this.state.input.trim());
     this.setState({ people: [...results] });
+    this.setState({ isLoad: false });
   };
 
   componentDidMount() {
@@ -36,14 +43,19 @@ export default class App extends React.Component<object, IAppState> {
           onSearch={this.handleSearch}
           input={this.state.input}
           setInput={(value) => this.setState({ input: value })}
+          setIsLoad={this.setIsLoad}
         />
-        <div className="person-cards">
-          {this.state.people.length > 0 ? (
-            this.state.people.map((item) => <PersonCard key={item.name} person={item} />)
-          ) : (
-            <div>People not found</div>
-          )}
-        </div>
+        {this.state.isLoad ? (
+          <Loader />
+        ) : (
+          <div className="person-cards">
+            {this.state.people.length > 0 ? (
+              this.state.people.map((item) => <PersonCard key={item.name} person={item} />)
+            ) : (
+              <div>People not found</div>
+            )}
+          </div>
+        )}
       </>
     );
   }

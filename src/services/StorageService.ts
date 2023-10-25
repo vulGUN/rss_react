@@ -1,11 +1,11 @@
 export default class StorageService {
-  private SEARCH_DATA = localStorage.getItem('searchData');
+  private SEARCH_STORAGE = localStorage.getItem('searchStorage');
 
   public getSearchData() {
-    return this.SEARCH_DATA;
+    return this.SEARCH_STORAGE;
   }
 
   public setSearchData(value: string) {
-    localStorage.setItem('searchData', value);
+    localStorage.setItem('searchStorage', value);
   }
 }

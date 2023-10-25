@@ -1,12 +1,18 @@
-export type SearchProps = {
+export interface SearchProps {
   onSearch: () => void;
   input: string;
   setInput: (value: string) => void;
+  setIsLoad: (value: boolean) => void;
+}
+
+export type PersonType = {
+  person: IPerson;
 };
 
 export interface IAppState {
   input: string;
   people: IPerson[];
+  isLoad: boolean;
 }
 
 export interface IPerson {

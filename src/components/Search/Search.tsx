@@ -10,6 +10,7 @@ export default class Search extends React.Component<SearchProps> {
   handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     this.props.onSearch();
+    this.props.setIsLoad(true);
   };
 
   render() {
