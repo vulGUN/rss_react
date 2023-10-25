@@ -8,13 +8,17 @@
 }
 
 .person-card {
-  min-width: 200px;
+  min-width: 230px;
   padding: 10px;
   background-color: #fff;
   border-radius: 8px;
+  border: 1px solid #cdcdcd;
+  color: #ffffff7b;
+  font-weight: 300;
 
   span {
     font-weight: bold;
+    color: #ffffffd7;
   }
 
   &__name {
@@ -23,5 +27,11 @@
     font-weight: bold;
     margin-bottom: 10px;
     font-size: 1.2em;
+    color: #ffffffd7;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background-color: rgba($color: #1a1a1a, $alpha: 1);
+    border: 1px solid #3f3f3f;
   }
 }

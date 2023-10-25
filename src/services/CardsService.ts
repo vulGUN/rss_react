@@ -5,8 +5,8 @@ export default class CardsService {
 
   private readonly API_ENDPOINT_PEOPLE = 'people';
 
-  public async getCards(value: string): Promise<IPeopleResponse> {
-    const URL = `${this.API_URL}${this.API_ENDPOINT_PEOPLE}/?search=${value}`;
+  public async getCards(value: string, pageNumber = 1): Promise<IPeopleResponse> {
+    const URL = `${this.API_URL}${this.API_ENDPOINT_PEOPLE}/?search=${value}&page=${pageNumber}`;
     const RESPONSE = await fetch(URL);
     const DATA = await RESPONSE.json();
 
