@@ -1,3 +1,14 @@
+export type SearchProps = {
+  onSearch: () => void;
+  input: string;
+  setInput: (value: string) => void;
+};
+
+export interface IAppState {
+  input: string;
+  people: IPerson[];
+}
+
 export interface IPerson {
   birth_year: string;
   created: string;
@@ -17,7 +28,7 @@ export interface IPerson {
   vehicles: string[];
 }
 
-export interface IPeopleResponse {
+export interface IPersonResponse {
   count: number;
   next: string | null;
   previous: string | null;

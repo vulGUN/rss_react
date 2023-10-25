@@ -1,60 +1,33 @@
-import { useEffect, useState } from 'react';
-import { IPerson } from '@services/types';
-import CardsService from '@services/CardsService';
-import StorageService from '@services/StorageService';
-import PersonCard from '@components/Card/PersonCard';
+import React from 'react';
+import { SearchProps } from 'src/types';
 import './Search.scss';
 
-const CARDS_SERVICE = new CardsService();
-const STORAGE_SERVICE = new StorageService();
+export default class Search extends React.Component<SearchProps> {
+  constructor(props: SearchProps) {
+    super(props);
+  }
 
-export default function Search() {
-  const [input, setInput] = useState(STORAGE_SERVICE.getSearchData() || '');
-  const [people, setPeople] = useState<IPerson[]>([]);
-
-  const handleSubmit = async (event: React.FormEvent) => {
+  handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-
-    const { results } = await CARDS_SERVICE.getCards(input.trim());
-    setPeople([...results]);
+    this.props.onSearch();
   };
 
-  const inputValue = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInput(event.target.value);
-  };
-
-  window.onbeforeunload = () => {
-    STORAGE_SERVICE.setSearchData(input);
-  };
-
-  useEffect(() => {
-    (async () => {
-      const { results } = await CARDS_SERVICE.getCards(input);
-      setPeople([...results]);
-    })();
-  }, []);
-
-  return (
-    <>
-      <form className="search" onSubmit={handleSubmit}>
+  render() {
+    return (
+      <form className="search" onSubmit={this.handleSubmit}>
         <input
           className="search__input"
           placeholder="enter character name ..."
           type="text"
-          value={input}
-          onInput={inputValue}
+          value={this.props.input}
+          onInput={(event: React.ChangeEvent<HTMLInputElement>) => {
+            this.props.setInput(event.target.value);
+          }}
         />
         <button className="search__button" type="submit">
           Search
         </button>
       </form>
-      <div className="person-cards">
-        {people.length > 0 ? (
-          people.map((item) => <PersonCard key={item.name} person={item} />)
-        ) : (
-          <div>People not found</div>
-        )}
-      </div>
-    </>
-  );
+    );
+  }
 }

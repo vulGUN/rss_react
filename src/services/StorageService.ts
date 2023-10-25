@@ -7,6 +7,5 @@ export default class StorageService {
 
   public setSearchData(value: string) {
     localStorage.setItem('searchData', value);
-    // this.SEARCH_DATA = value;
   }
 }
