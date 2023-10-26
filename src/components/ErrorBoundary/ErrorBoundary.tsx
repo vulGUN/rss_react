@@ -1,5 +1,6 @@
 import React from 'react';
 import { IErrorBoundaryProps, IErrorBoundaryState } from 'src/types';
+import './ErrorBoundary.scss';
 
 export default class ErrorBoundary extends React.Component<
   IErrorBoundaryProps,
@@ -10,15 +11,18 @@ export default class ErrorBoundary extends React.Component<
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(error: Error) {
-    console.error(error);
+  static getDerivedStateFromError() {
     console.log('work');
     return { hasError: true };
   }
 
   render() {
     if (this.state.hasError) {
-      return <div>Something went wrong, try again</div>;
+      return (
+        <div className="error__boundary">
+          🚫 Something went wrong, please restart the application
+        </div>
+      );
     }
 
     return this.props.children;

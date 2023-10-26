@@ -8,6 +8,9 @@ export default class PersonalCard extends React.Component<PersonType> {
   }
 
   render() {
+    if (this.props.throwError) {
+      throw new Error('New ErrorBoundary test');
+    }
     return (
       <div className="person-card">
         <div className="person-card__name">{this.props.person.name}</div>

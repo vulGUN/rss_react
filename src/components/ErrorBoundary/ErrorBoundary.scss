@@ -1,0 +1,10 @@
+.error__boundary {
+  text-align: center;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #fff;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: rgba($color: #1a1a1a, $alpha: 1);
+  }
+}

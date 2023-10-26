@@ -44,29 +44,28 @@ export default class App extends React.Component<object, IAppState> {
   }
 
   render() {
-    if (this.state.throwError) {
-      throw new Error('This is a ErrorBoundary');
-    }
     return (
       <>
+        <div className="header">
+          <Search
+            onSearch={this.handleSearch}
+            input={this.state.input}
+            setInput={(value) => this.setState({ input: value })}
+            setIsLoad={this.setIsLoad}
+          />
+          <button className="error__button" onClick={this.handleError}>
+            Error
+          </button>
+        </div>
         <ErrorBoundary>
-          <div className="header">
-            <Search
-              onSearch={this.handleSearch}
-              input={this.state.input}
-              setInput={(value) => this.setState({ input: value })}
-              setIsLoad={this.setIsLoad}
-            />
-            <button className="error__button" onClick={this.handleError}>
-              Error
-            </button>
-          </div>
           {this.state.isLoad ? (
             <Loader />
           ) : (
             <div className="person-cards">
-              {this.state.people.length > 0 ? (
-                this.state.people.map((item) => <PersonCard key={item.name} person={item} />)
+              {this.state.people && this.state.people.length > 0 ? (
+                this.state.people.map((item, index) => (
+                  <PersonCard key={index} person={item} throwError={this.state.throwError} />
+                ))
               ) : (
                 <div>Sorry, nothing found. Try again</div>
               )}

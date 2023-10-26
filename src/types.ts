@@ -7,6 +7,7 @@ export interface SearchProps {
 
 export type PersonType = {
   person: IPerson;
+  throwError: boolean;
 };
 
 export interface IErrorBoundaryState {
@@ -43,7 +44,7 @@ export interface IPerson {
   vehicles: string[];
 }
 
-export interface IPersonResponse {
+export interface IPersonData {
   count: number;
   next: string | null;
   previous: string | null;
