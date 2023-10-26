@@ -9,10 +9,19 @@ export type PersonType = {
   person: IPerson;
 };
 
+export interface IErrorBoundaryState {
+  hasError: boolean;
+}
+
+export interface IErrorBoundaryProps {
+  children: React.ReactNode;
+}
+
 export interface IAppState {
   input: string;
   people: IPerson[];
   isLoad: boolean;
+  throwError: boolean;
 }
 
 export interface IPerson {

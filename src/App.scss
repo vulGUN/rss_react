@@ -1,0 +1,26 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  gap: 20px;
+}
+
+.error__button {
+  background-color: #bf4242;
+  border: 1px solid #ff8282;
+
+  &:hover {
+    background-color: #702626;
+  }
+}
+
+.person-cards {
+  max-width: 1440px;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
