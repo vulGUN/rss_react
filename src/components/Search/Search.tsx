@@ -1,6 +1,12 @@
 import React from 'react';
-import { SearchProps } from 'src/types';
 import './Search.scss';
+
+interface SearchProps {
+  input: string;
+  onSearch: () => void;
+  setInput: (value: string) => void;
+  setIsLoad: (value: boolean) => void;
+}
 
 export default class Search extends React.Component<SearchProps> {
   constructor(props: SearchProps) {

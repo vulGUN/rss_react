@@ -1,5 +1,5 @@
 import React from 'react';
-import { PersonType } from 'src/types';
+import { PersonType } from '@components/PersonalCard/types';
 import './PersonCard.scss';
 
 export default class PersonalCard extends React.Component<PersonType> {
@@ -8,9 +8,6 @@ export default class PersonalCard extends React.Component<PersonType> {
   }
 
   render() {
-    if (this.props.throwError) {
-      throw new Error('New ErrorBoundary test');
-    }
     return (
       <div className="person-card">
         <div className="person-card__name">{this.props.person.name}</div>

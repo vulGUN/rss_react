@@ -1,6 +1,13 @@
 import React from 'react';
-import { IErrorBoundaryProps, IErrorBoundaryState } from 'src/types';
 import './ErrorBoundary.scss';
+
+interface IErrorBoundaryState {
+  hasError: boolean;
+}
+
+interface IErrorBoundaryProps {
+  children: React.ReactNode;
+}
 
 export default class ErrorBoundary extends React.Component<
   IErrorBoundaryProps,

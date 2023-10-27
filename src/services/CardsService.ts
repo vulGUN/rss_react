@@ -1,4 +1,4 @@
-import { IPersonData } from 'src/types';
+import { IPersonData } from '@services/types';
 
 export default class CardsService {
   private readonly API_URL = 'https://swapi.dev/api/';
@@ -6,10 +6,10 @@ export default class CardsService {
   private readonly API_PEOPLE_ENDPOINT = 'people';
 
   public async getCards(value: string, pageNumber = 1): Promise<IPersonData> {
-    const URL: string = `${this.API_URL}${this.API_PEOPLE_ENDPOINT}/?search=${value}&page=${pageNumber}`;
-    const RESPONSE: Response = await fetch(URL);
-    const DATA: IPersonData = await RESPONSE.json();
+    const url: string = `${this.API_URL}${this.API_PEOPLE_ENDPOINT}/?search=${value}&page=${pageNumber}`;
+    const response: Response = await fetch(url);
+    const data: IPersonData = await response.json();
 
-    return DATA;
+    return data;
   }
 }
