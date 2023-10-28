@@ -1,8 +1,8 @@
 import React from 'react';
 import PersonCard from '@components/PersonalCard/PersonCard';
 import Loader from '@components/Loader/Loader';
-import './PersonListSection.scss';
 import { IPerson } from '@components/PersonalCard/types';
+import './PersonListSection.scss';
 
 interface IPersonListProps {
   people: IPerson[];

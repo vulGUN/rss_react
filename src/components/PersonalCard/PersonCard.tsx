@@ -17,18 +17,6 @@ export default class PersonalCard extends React.Component<PersonType> {
         <div className="person-card__gender">
           Gender: <span>{this.props.person.gender}</span>
         </div>
-        <div className="person-card__height">
-          Height: <span>{this.props.person.height} m</span>
-        </div>
-        <div className="person-card__mass">
-          Mass: <span>{this.props.person.mass} kg</span>
-        </div>
-        <div className="person-card__eye-color">
-          Eye color: <span>{this.props.person.eye_color}</span>
-        </div>
-        <div className="person-card__hair-color">
-          Hair color: <span>{this.props.person.hair_color}</span>
-        </div>
       </div>
     );
   }

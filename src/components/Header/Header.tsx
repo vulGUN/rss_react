@@ -3,6 +3,7 @@ import Search from '@components/Search/Search';
 import { IPerson } from '@components/PersonalCard/types';
 import StorageService from '@services/StorageService';
 import CardsService from '@services/CardsService';
+import logoImg from '@assets/img/sw-logo.png';
 import './Header.scss';
 
 interface IHeaderState {
@@ -55,15 +56,18 @@ export default class Header extends React.Component<IHeaderProps, IHeaderState> 
   render() {
     return (
       <div className="header">
-        <Search
-          onSearch={this.handleSearch}
-          input={this.state.input}
-          setInput={(value) => this.setState({ input: value })}
-          setIsLoad={this.setIsLoad}
-        />
-        <button className="error-button" onClick={this.handleError}>
-          Error
-        </button>
+        <img src={logoImg} alt="star wars logo" />
+        <div className="search__wrapper">
+          <Search
+            onSearch={this.handleSearch}
+            input={this.state.input}
+            setInput={(value) => this.setState({ input: value })}
+            setIsLoad={this.setIsLoad}
+          />
+          <button className="error-button" onClick={this.handleError}>
+            Error
+          </button>
+        </div>
       </div>
     );
   }
