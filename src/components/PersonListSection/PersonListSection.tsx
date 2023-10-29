@@ -19,11 +19,11 @@ export default class PersonListSection extends React.Component<IPersonListProps>
       throw new Error('Network error');
     }
     return (
-      <>
+      <div className="person-list">
         {this.props.isLoad ? (
           <Loader />
         ) : (
-          <div className="person-list">
+          <div className="person-list__container">
             {this.props.people && this.props.people.length > 0 ? (
               this.props.people.map((item, index) => <PersonCard key={index} person={item} />)
             ) : (
@@ -31,7 +31,7 @@ export default class PersonListSection extends React.Component<IPersonListProps>
             )}
           </div>
         )}
-      </>
+      </div>
     );
   }
 }
