@@ -1,14 +1,10 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import Search from '@components/Search/Search';
 import { IPerson } from '@components/PersonalCard/types';
 import StorageService from '@services/StorageService';
 import CardsService from '@services/CardsService';
 import logoImg from '@assets/img/sw-logo.png';
 import './Header.scss';
-
-interface IHeaderState {
-  input: string;
-}
 
 interface IHeaderProps {
   setPeople: (data: IPerson[]) => void;
@@ -19,56 +15,48 @@ interface IHeaderProps {
 const STORAGE_SERVICE = new StorageService();
 const CARDS_SERVICE = new CardsService();
 
-export default class Header extends React.Component<IHeaderProps, IHeaderState> {
-  constructor(props: IHeaderProps) {
-    super(props);
-    this.state = {
-      input: STORAGE_SERVICE.getSearchData() || '',
-    };
-  }
+export default function Header({ setPeople, setIsLoad, setIsNetworkError }: IHeaderProps) {
+  const [input, setInput] = useState(STORAGE_SERVICE.getSearchData() || '');
 
-  setIsLoad = (value: boolean) => {
-    this.props.setIsLoad(value);
+  const handleError = () => {
+    setPeople([{ name: { 15: 15 } } as unknown as IPerson]);
   };
 
-  handleError = () => {
-    this.props.setPeople([{ name: { 15: 15 } } as unknown as IPerson]);
-  };
-
-  handleSearch = async () => {
+  const handleSearch = async () => {
     try {
-      const { results } = await CARDS_SERVICE.getCards(this.state.input.trim());
-      this.props.setPeople([...results]);
-      this.props.setIsLoad(false);
+      const { results } = await CARDS_SERVICE.getCards(input.trim());
+      setPeople(results);
+      setIsLoad(false);
     } catch (error) {
       console.error(error);
-      this.props.setIsNetworkError(true);
+      setIsNetworkError(true);
     }
   };
 
-  componentDidMount() {
-    this.handleSearch();
-    window.onbeforeunload = () => {
-      STORAGE_SERVICE.setSearchData(this.state.input);
-    };
-  }
+  useEffect(() => {
+    handleSearch();
+  }, []);
 
-  render() {
-    return (
-      <div className="header">
-        <img src={logoImg} alt="star wars logo" />
-        <div className="search__wrapper">
-          <Search
-            onSearch={this.handleSearch}
-            input={this.state.input}
-            setInput={(value) => this.setState({ input: value })}
-            setIsLoad={this.setIsLoad}
-          />
-          <button className="error-button" onClick={this.handleError}>
-            Error
-          </button>
-        </div>
+  useEffect(() => {
+    window.onbeforeunload = () => {
+      STORAGE_SERVICE.setSearchData(input);
+    };
+  }, [input]);
+
+  return (
+    <div className="header">
+      <img src={logoImg} alt="star wars logo" />
+      <div className="search__wrapper">
+        <Search
+          onSearch={handleSearch}
+          input={input}
+          setInput={(value) => setInput(value)}
+          setIsLoad={(value) => setIsLoad(value)}
+        />
+        <button className="error-button" onClick={handleError}>
+          Error
+        </button>
       </div>
-    );
-  }
+    </div>
+  );
 }

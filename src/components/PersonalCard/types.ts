@@ -1,7 +1,3 @@
-export type PersonType = {
-  person: IPerson;
-};
-
 export interface IPerson {
   birth_year: string;
   created: string;
