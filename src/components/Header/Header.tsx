@@ -1,31 +1,32 @@
 import { useEffect, useState } from 'react';
 import Search from '@components/Search/Search';
-import { IPerson } from '@components/PersonalCard/types';
 import StorageService from '@services/StorageService';
 import CardsService from '@services/CardsService';
 import logoImg from '@assets/img/sw-logo.png';
+import { useData } from 'src/contexts/DataProviders';
 import './Header.scss';
 
 interface IHeaderProps {
-  setPeople: (data: IPerson[]) => void;
-  setIsLoad: (value: boolean) => void;
   setIsNetworkError: (value: boolean) => void;
 }
 
 const STORAGE_SERVICE = new StorageService();
 const CARDS_SERVICE = new CardsService();
 
-export default function Header({ setPeople, setIsLoad, setIsNetworkError }: IHeaderProps) {
+export default function Header({ setIsNetworkError }: IHeaderProps) {
   const [input, setInput] = useState(STORAGE_SERVICE.getSearchData() || '');
 
   const handleError = () => {
-    setPeople([{ name: { 15: 15 } } as unknown as IPerson]);
+    // setPeople({ results: [{ name: { 15: 15 } } as unknown as IPerson] });
+    console.log('ok');
   };
+
+  const { setData, setIsLoad } = useData();
 
   const handleSearch = async () => {
     try {
-      const { results } = await CARDS_SERVICE.getCards(input.trim());
-      setPeople(results);
+      const data = await CARDS_SERVICE.getCards(input.trim());
+      setData(data);
       setIsLoad(false);
     } catch (error) {
       console.error(error);
