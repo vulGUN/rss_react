@@ -15,6 +15,7 @@ const CARDS_SERVICE = new CardsService();
 
 export default function Header({ setIsNetworkError }: IHeaderProps) {
   const [input, setInput] = useState(STORAGE_SERVICE.getSearchData() || '');
+  const { setPage } = useData();
 
   const handleError = () => {
     // setPeople({ results: [{ name: { 15: 15 } } as unknown as IPerson] });
@@ -42,6 +43,7 @@ export default function Header({ setIsNetworkError }: IHeaderProps) {
     window.onbeforeunload = () => {
       STORAGE_SERVICE.setSearchData(input);
     };
+    setPage(1);
   }, [input]);
 
   return (

@@ -54,9 +54,21 @@ button {
 button:hover {
   background-color: #646cff;
 }
+// button:disabled:hover {
+//   background-color: initial;
+// }
 
 button:active {
   transform: scale(0.95);
+}
+
+button:active:disabled {
+  transform: scale(1);
+}
+
+button:disabled {
+  cursor: auto;
+  filter: brightness(0.7);
 }
 
 @media (prefers-color-scheme: light) {

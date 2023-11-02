@@ -6,21 +6,13 @@ interface DataContextType {
   setData: React.Dispatch<React.SetStateAction<IPersonData>>;
   isLoad: boolean;
   setIsLoad: React.Dispatch<React.SetStateAction<boolean>>;
+  page: number;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
 type DataProviderType = { children: React.ReactNode };
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
-
-// const DataContext = createContext<DataContextType>({
-//   data: {
-//     count: 0,
-//     next: null,
-//     previous: null,
-//     results: [],
-//   },
-//   setData: () => {},
-// });
 
 export function DataProvider({ children }: DataProviderType) {
   const [data, setData] = useState<IPersonData>({
@@ -30,8 +22,9 @@ export function DataProvider({ children }: DataProviderType) {
     results: [],
   });
   const [isLoad, setIsLoad] = useState(true);
+  const [page, setPage] = useState(1);
 
-  const value = { data, setData, isLoad, setIsLoad };
+  const value = { data, setData, isLoad, setIsLoad, page, setPage };
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 }
