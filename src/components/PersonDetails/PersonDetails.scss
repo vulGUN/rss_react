@@ -1,0 +1,37 @@
+.person-details {
+  padding: 20px;
+  width: 20vw;
+  min-width: 250px;
+  flex-shrink: 0;
+  border: 4px solid #d77265;
+  border-radius: 22px;
+  background-color: #02020a;
+
+  @media (prefers-color-scheme: dark) {
+    border: 4px solid #cdcdcd;
+  }
+
+  &__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 20px;
+    gap: 20px;
+
+    div {
+      font-size: 1.2rem;
+    }
+  }
+
+  .person-details__info {
+    color: #ffffff7b;
+    font-weight: 300;
+
+    span {
+      font-weight: bold;
+      color: #ffffffd7;
+    }
+  }
+}

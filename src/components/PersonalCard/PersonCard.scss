@@ -1,0 +1,47 @@
+.person-card {
+  width: 230px;
+  min-height: 360px;
+  padding: 10px;
+  background: url('../../assets/img/card.jpg') center center/cover no-repeat;
+  border-radius: 22px;
+  border: 4px solid #d77265;
+  color: #ffffff7b;
+  font-weight: 300;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 0.8em;
+
+  span {
+    font-weight: bold;
+    color: #ffffffd7;
+  }
+
+  &__name {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #ffffff;
+    &::before {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 2px;
+      background-color: #ffffff7b;
+      margin: 5px auto;
+    }
+    &::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 2px;
+      background-color: #ffffff7b;
+      margin: 8px auto;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    border: 4px solid #cdcdcd;
+  }
+}

@@ -1,0 +1,17 @@
+.person-list {
+  padding: 70px 20px;
+
+  .person-list__wrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+
+    .person-list__container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+    }
+  }
+}
