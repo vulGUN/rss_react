@@ -32,6 +32,8 @@ input {
   font-size: 1em;
   font-weight: 400;
   font-family: inherit;
+  color: #1a1a1a;
+  background-color: #fff;
 }
 
 input:focus {
@@ -54,9 +56,6 @@ button {
 button:hover {
   background-color: #646cff;
 }
-// button:disabled:hover {
-//   background-color: initial;
-// }
 
 button:active {
   transform: scale(0.95);
@@ -69,6 +68,10 @@ button:active:disabled {
 button:disabled {
   cursor: auto;
   filter: brightness(0.7);
+}
+
+a {
+  text-decoration: none;
 }
 
 @media (prefers-color-scheme: light) {

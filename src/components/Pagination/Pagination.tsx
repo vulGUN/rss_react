@@ -1,14 +1,16 @@
-// import { useState } from 'react';
 import CardsService from '@services/CardsService';
 import { useData } from 'src/contexts/DataProviders';
+import { useNavigate, useParams } from 'react-router-dom';
 import './Pagination.scss';
+import { useEffect } from 'react';
 
 const CARDS_SERVICE = new CardsService();
 
 export default function Pagination() {
-  // const [count, setCount] = useState<number>(1);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { data, setData, setIsLoad, page, setPage } = useData();
+  const { data, setData, setIsLoad, page, setPage, setIsNetworkError } = useData();
+  const navigate = useNavigate();
+  const { pageNumber } = useParams();
+  console.log(pageNumber);
 
   const prevPageFn = async () => {
     if (page > 1 && data.previous) {
@@ -16,11 +18,11 @@ export default function Pagination() {
       try {
         const newData = await CARDS_SERVICE.getNextOrPrevCards(data.previous);
         setData(newData);
+        setPage((prevState) => prevState - 1);
       } catch (error) {
-        console.error(error);
+        setIsNetworkError(true);
       }
       setIsLoad(false);
-      setPage((prevState) => prevState - 1);
     }
   };
 
@@ -32,20 +34,24 @@ export default function Pagination() {
         setData(newData);
         setPage((prevState) => prevState + 1);
       } catch (error) {
-        console.error(error);
+        setIsNetworkError(true);
       }
       setIsLoad(false);
     }
   };
 
+  useEffect(() => {
+    navigate(`/page/${page}`);
+  }, [page]);
+
   return (
     <div className="pagination">
       <button disabled={!data.previous} className="pagination__prev" onClick={prevPageFn}>
-        prev
+        {`←`}
       </button>
       <div>{page}</div>
       <button disabled={!data.next} className="pagination__next" onClick={nextPageFn}>
-        next
+        {`→`}
       </button>
     </div>
   );

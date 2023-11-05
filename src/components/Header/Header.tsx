@@ -5,27 +5,25 @@ import CardsService from '@services/CardsService';
 import logoImg from '@assets/img/sw-logo.png';
 import { useData } from 'src/contexts/DataProviders';
 import './Header.scss';
-
-interface IHeaderProps {
-  setIsNetworkError: (value: boolean) => void;
-}
+import { IPerson } from '@components/PersonalCard/types';
 
 const STORAGE_SERVICE = new StorageService();
 const CARDS_SERVICE = new CardsService();
 
-export default function Header({ setIsNetworkError }: IHeaderProps) {
+export default function Header() {
   const [input, setInput] = useState(STORAGE_SERVICE.getSearchData() || '');
-  const { setPage } = useData();
+  const { setPage, setData, setIsLoad, setIsNetworkError } = useData();
 
   const handleError = () => {
-    // setPeople({ results: [{ name: { 15: 15 } } as unknown as IPerson] });
-    console.log('ok');
+    setData((prevState) => ({
+      ...prevState,
+      results: [{ name: { 15: 15 } } as unknown as IPerson],
+    }));
   };
-
-  const { setData, setIsLoad } = useData();
 
   const handleSearch = async () => {
     try {
+      setPage(1);
       const data = await CARDS_SERVICE.getCards(input.trim());
       setData(data);
       setIsLoad(false);
@@ -43,7 +41,6 @@ export default function Header({ setIsNetworkError }: IHeaderProps) {
     window.onbeforeunload = () => {
       STORAGE_SERVICE.setSearchData(input);
     };
-    setPage(1);
   }, [input]);
 
   return (

@@ -8,6 +8,10 @@ interface DataContextType {
   setIsLoad: React.Dispatch<React.SetStateAction<boolean>>;
   page: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
+  isNetworkError: boolean;
+  setIsNetworkError: React.Dispatch<React.SetStateAction<boolean>>;
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 type DataProviderType = { children: React.ReactNode };
@@ -23,8 +27,21 @@ export function DataProvider({ children }: DataProviderType) {
   });
   const [isLoad, setIsLoad] = useState(true);
   const [page, setPage] = useState(1);
+  const [isNetworkError, setIsNetworkError] = useState(false);
+  const [open, setOpen] = useState(false);
 
-  const value = { data, setData, isLoad, setIsLoad, page, setPage };
+  const value = {
+    data,
+    setData,
+    isLoad,
+    setIsLoad,
+    page,
+    setPage,
+    isNetworkError,
+    setIsNetworkError,
+    open,
+    setOpen,
+  };
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 }
