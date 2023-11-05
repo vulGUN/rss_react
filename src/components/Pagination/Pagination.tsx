@@ -1,16 +1,14 @@
 import CardsService from '@services/CardsService';
 import { useData } from 'src/contexts/DataProviders';
-import { useNavigate, useParams } from 'react-router-dom';
-import './Pagination.scss';
+import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import './Pagination.scss';
 
 const CARDS_SERVICE = new CardsService();
 
 export default function Pagination() {
   const { data, setData, setIsLoad, page, setPage, setIsNetworkError } = useData();
   const navigate = useNavigate();
-  const { pageNumber } = useParams();
-  console.log(pageNumber);
 
   const prevPageFn = async () => {
     if (page > 1 && data.previous) {
