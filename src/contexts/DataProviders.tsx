@@ -1,5 +1,6 @@
+import StorageService from '@services/StorageService';
 import { IPersonData } from '@services/types';
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 interface DataContextType {
   data: IPersonData;
@@ -12,11 +13,15 @@ interface DataContextType {
   setIsNetworkError: React.Dispatch<React.SetStateAction<boolean>>;
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  input: string;
+  setInput: React.Dispatch<React.SetStateAction<string>>;
 }
 
 type DataProviderType = { children: React.ReactNode };
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
+
+const STORAGE_SERVICE = new StorageService();
 
 export function DataProvider({ children }: DataProviderType) {
   const [data, setData] = useState<IPersonData>({
@@ -29,6 +34,13 @@ export function DataProvider({ children }: DataProviderType) {
   const [page, setPage] = useState(1);
   const [isNetworkError, setIsNetworkError] = useState(false);
   const [open, setOpen] = useState(false);
+  const [input, setInput] = useState(STORAGE_SERVICE.getSearchData() || '');
+
+  useEffect(() => {
+    window.onbeforeunload = () => {
+      STORAGE_SERVICE.setSearchData(input);
+    };
+  }, [input]);
 
   const value = {
     data,
@@ -41,6 +53,8 @@ export function DataProvider({ children }: DataProviderType) {
     setIsNetworkError,
     open,
     setOpen,
+    input,
+    setInput,
   };
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
