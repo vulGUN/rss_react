@@ -1,10 +1,10 @@
-import Header from '@components/Header/Header';
-import PersonListSection from '@components/PersonListSection/PersonListSection';
-import ErrorBoundary from '@components/ErrorBoundary/ErrorBoundary';
-import { Routes, Route, useNavigate } from 'react-router-dom';
-import { useData } from 'src/contexts/DataProviders';
 import { useEffect } from 'react';
-import PersonDetails from '@components/PersonDetails/PersonDetails';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import Header from '@/components/Header/Header';
+import PersonListSection from '@/components/PersonListSection/PersonListSection';
+import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
+import PersonDetails from '@/components/PersonDetails/PersonDetails';
+import { useData } from '@/contexts/DataProvider';
 
 export default function App() {
   const { page } = useData();

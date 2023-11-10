@@ -1,7 +1,7 @@
-import PersonCard from '@components/PersonalCard/PersonCard';
-import Loader from '@components/Loader/Loader';
-import Pagination from '@components/Pagination/Pagination';
-import { useData } from 'src/contexts/DataProviders';
+import PersonCard from '@/components/PersonalCard/PersonCard';
+import Loader from '@/components/Loader/Loader';
+import Pagination from '@/components/Pagination/Pagination';
+import { useData } from '@/contexts/DataProvider';
 import { Link, Outlet, useNavigate, useParams } from 'react-router-dom';
 import './PersonListSection.scss';
 

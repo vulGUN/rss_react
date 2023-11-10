@@ -1,5 +1,5 @@
-import StorageService from '@services/StorageService';
-import { IPersonData } from '@services/types';
+import StorageService from '@/services/StorageService';
+import { IPersonData } from '@/services/types';
 import { createContext, useContext, useEffect, useState } from 'react';
 
 interface DataContextType {

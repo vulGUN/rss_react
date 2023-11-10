@@ -1,5 +1,5 @@
-import { useData } from 'src/contexts/DataProviders';
-import Loader from '@components/Loader/Loader';
+import { useData } from '@/contexts/DataProvider';
+import Loader from '@/components/Loader/Loader';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import './PersonDetails.scss';

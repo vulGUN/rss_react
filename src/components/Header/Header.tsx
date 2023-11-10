@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
-import Search from '@components/Search/Search';
-import CardsService from '@services/CardsService';
-import logoImg from '@assets/img/sw-logo.png';
-import { useData } from 'src/contexts/DataProviders';
+import Search from '@/components/Search/Search';
+import CardsService from '@/services/CardsService';
+import logoImg from '@/assets/img/sw-logo.png';
+import { useData } from '@/contexts/DataProvider';
+import { IPerson } from '@/components/PersonalCard/types';
 import './Header.scss';
-import { IPerson } from '@components/PersonalCard/types';
 
 const CARDS_SERVICE = new CardsService();
 
