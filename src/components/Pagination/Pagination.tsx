@@ -1,5 +1,5 @@
-import CardsService from '@services/CardsService';
-import { useData } from 'src/contexts/DataProviders';
+import CardsService from '@/services/CardsService';
+import { useData } from '@/contexts/DataProvider';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import './Pagination.scss';

@@ -23,15 +23,15 @@
     "noImplicitAny": true,
     "baseUrl": ".",
     "paths": {
-      // "src/*": ["src/*"]
-      "@components/*": ["src/components/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@services/*": ["src/services/*"],
-      "@assets/*": ["src/assets/*"],
-      "@types/*": ["src/types/*"],
-      "@view/*": ["src/view/*"]
+      "@/*": ["src/*"]
+      // "@components/*": ["src/components/*"],
+      // "@hooks/*": ["src/hooks/*"],
+      // "@services/*": ["src/services/*"],
+      // "@assets/*": ["src/assets/*"],
+      // "@types/*": ["src/types/*"],
+      // "@view/*": ["src/view/*"]
     }
   },
-  "include": ["src"],
+  "include": ["jest.config.ts", "vite.config.ts", ".eslintrc.cjs", "src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

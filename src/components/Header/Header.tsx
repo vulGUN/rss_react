@@ -1,18 +1,15 @@
-import { useEffect, useState } from 'react';
-import Search from '@components/Search/Search';
-import StorageService from '@services/StorageService';
-import CardsService from '@services/CardsService';
-import logoImg from '@assets/img/sw-logo.png';
-import { useData } from 'src/contexts/DataProviders';
+import { useEffect } from 'react';
+import Search from '@/components/Search/Search';
+import CardsService from '@/services/CardsService';
+import logoImg from '@/assets/img/sw-logo.png';
+import { useData } from '@/contexts/DataProvider';
+import { IPerson } from '@/components/PersonCard/types';
 import './Header.scss';
-import { IPerson } from '@components/PersonalCard/types';
 
-const STORAGE_SERVICE = new StorageService();
 const CARDS_SERVICE = new CardsService();
 
 export default function Header() {
-  const [input, setInput] = useState(STORAGE_SERVICE.getSearchData() || '');
-  const { setPage, setData, setIsLoad, setIsNetworkError } = useData();
+  const { setPage, setData, setIsLoad, setIsNetworkError, input, setInput } = useData();
 
   const handleError = () => {
     setData((prevState) => ({
@@ -36,12 +33,6 @@ export default function Header() {
   useEffect(() => {
     handleSearch();
   }, []);
-
-  useEffect(() => {
-    window.onbeforeunload = () => {
-      STORAGE_SERVICE.setSearchData(input);
-    };
-  }, [input]);
 
   return (
     <div className="header">

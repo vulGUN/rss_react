@@ -1,4 +1,5 @@
 import React from 'react';
+import StorageService from '@/services/StorageService';
 import './Search.scss';
 
 interface SearchProps {
@@ -8,11 +9,14 @@ interface SearchProps {
   setIsLoad: (value: boolean) => void;
 }
 
+const STORAGE_SERVICE = new StorageService();
+
 export default function Search({ input, onSearch, setInput, setIsLoad }: SearchProps) {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     onSearch();
     setIsLoad(true);
+    STORAGE_SERVICE.setSearchData(input);
   };
 
   return (

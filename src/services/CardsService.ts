@@ -1,4 +1,4 @@
-import { IPersonData } from '@services/types';
+import { IPersonData } from '@/services/types';
 
 export default class CardsService {
   private readonly API_URL = 'https://swapi.dev/api/';
