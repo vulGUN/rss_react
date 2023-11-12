@@ -5,6 +5,7 @@ import PersonListSection from '@/components/PersonListSection/PersonListSection'
 import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
 import PersonDetails from '@/components/PersonDetails/PersonDetails';
 import { useData } from '@/contexts/DataProvider';
+import Page404 from '@/components/Page404/Page404';
 
 export default function App() {
   const { page } = useData();
@@ -22,6 +23,7 @@ export default function App() {
           <Route path="/page/:pageNumber" element={<PersonListSection />}>
             <Route path="/page/:pageNumber/details/:personId" element={<PersonDetails />} />
           </Route>
+          <Route path="*" element={<Page404 />}></Route>
         </Routes>
       </ErrorBoundary>
     </>

@@ -16,7 +16,7 @@ const mockData = {
     next: 'next-url',
     count: 100,
   },
-  page: 2,
+  page: 1,
 };
 
 test('Check prev and next', async () => {
@@ -31,10 +31,8 @@ test('Check prev and next', async () => {
   );
 
   fireEvent.click(screen.getByText('→'));
-  // await waitFor(() => expect(mockData.setPage).toHaveBeenCalledWith(mockData.page + 1));
-  expect(window.location.pathname).toBe('/page/1');
+  expect(window.location.pathname).toBe(`/page/${mockData.page}`);
 
   fireEvent.click(screen.getByText('←'));
-  // await waitFor(() => expect(mockData.setPage).toHaveBeenCalledWith(mockData.page - 1));
-  expect(window.location.pathname).toBe('/page/1');
+  expect(window.location.pathname).toBe(`/page/${mockData.page}`);
 });
