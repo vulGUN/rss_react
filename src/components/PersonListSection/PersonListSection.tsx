@@ -1,4 +1,4 @@
-import PersonCard from '@/components/PersonalCard/PersonCard';
+import PersonCard from '@/components/PersonCard/PersonCard';
 import Loader from '@/components/Loader/Loader';
 import Pagination from '@/components/Pagination/Pagination';
 import { useData } from '@/contexts/DataProvider';

@@ -1,8 +1,8 @@
 import StorageService from '@/services/StorageService';
 import { IPersonData } from '@/services/types';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 
-interface DataContextType {
+export interface DataContextType {
   data: IPersonData;
   setData: React.Dispatch<React.SetStateAction<IPersonData>>;
   isLoad: boolean;
@@ -19,7 +19,7 @@ interface DataContextType {
 
 type DataProviderType = { children: React.ReactNode };
 
-const DataContext = createContext<DataContextType | undefined>(undefined);
+export const DataContext = createContext<DataContextType | undefined>(undefined);
 
 const STORAGE_SERVICE = new StorageService();
 
@@ -35,12 +35,6 @@ export function DataProvider({ children }: DataProviderType) {
   const [isNetworkError, setIsNetworkError] = useState(false);
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState(STORAGE_SERVICE.getSearchData() || '');
-
-  useEffect(() => {
-    window.onbeforeunload = () => {
-      STORAGE_SERVICE.setSearchData(input);
-    };
-  }, [input]);
 
   const value = {
     data,

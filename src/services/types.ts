@@ -1,4 +1,4 @@
-import { IPerson } from '@components/PersonalCard/types';
+import { IPerson } from '@/components/PersonCard/types';
 
 export interface IPersonData {
   count: number;

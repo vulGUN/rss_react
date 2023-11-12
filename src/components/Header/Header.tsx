@@ -3,7 +3,7 @@ import Search from '@/components/Search/Search';
 import CardsService from '@/services/CardsService';
 import logoImg from '@/assets/img/sw-logo.png';
 import { useData } from '@/contexts/DataProvider';
-import { IPerson } from '@/components/PersonalCard/types';
+import { IPerson } from '@/components/PersonCard/types';
 import './Header.scss';
 
 const CARDS_SERVICE = new CardsService();
