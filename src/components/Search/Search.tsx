@@ -1,21 +1,24 @@
 import React from 'react';
 import StorageService from '@/services/StorageService';
+import { useSelector, useDispatch } from 'react-redux';
+import { setIsLoad, setInput } from '@/store/dataSlice';
+import { RootState } from '@/store/Store';
 import './Search.scss';
 
 interface SearchProps {
-  input: string;
   onSearch: () => void;
-  setInput: (value: string) => void;
-  setIsLoad: (value: boolean) => void;
 }
 
 const STORAGE_SERVICE = new StorageService();
 
-export default function Search({ input, onSearch, setInput, setIsLoad }: SearchProps) {
+export default function Search({ onSearch }: SearchProps) {
+  const { input } = useSelector((state: RootState) => state.data);
+  const dispatch = useDispatch();
+
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     onSearch();
-    setIsLoad(true);
+    dispatch(setIsLoad(true));
     STORAGE_SERVICE.setSearchData(input);
   };
 
@@ -27,7 +30,7 @@ export default function Search({ input, onSearch, setInput, setIsLoad }: SearchP
         type="text"
         value={input}
         onInput={(event: React.ChangeEvent<HTMLInputElement>) => {
-          setInput(event.target.value);
+          dispatch(setInput(event.target.value));
         }}
       />
       <button className="search__button" type="submit">

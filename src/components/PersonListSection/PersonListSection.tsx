@@ -1,12 +1,17 @@
 import PersonCard from '@/components/PersonCard/PersonCard';
 import Loader from '@/components/Loader/Loader';
 import Pagination from '@/components/Pagination/Pagination';
-import { useData } from '@/contexts/DataProvider';
 import { Link, Outlet, useNavigate, useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { setOpen } from '@/store/dataSlice';
+import { RootState } from '@/store/Store';
 import './PersonListSection.scss';
 
 export default function PersonListSection() {
-  const { isNetworkError, data, isLoad, page, open, setOpen } = useData();
+  const { isNetworkError, data, isLoad, page, isOpen } = useSelector(
+    (state: RootState) => state.data
+  );
+  const dispatch = useDispatch();
   const { pageNumber } = useParams();
   const navigate = useNavigate();
 
@@ -15,9 +20,9 @@ export default function PersonListSection() {
   }
 
   const handleCloseBtn = () => {
-    if (open) {
+    if (isOpen) {
       navigate(`/page/${page}`);
-      setOpen(false);
+      dispatch(setOpen(false));
     }
   };
 

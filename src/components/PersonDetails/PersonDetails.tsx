@@ -1,22 +1,25 @@
-import { useData } from '@/contexts/DataProvider';
 import Loader from '@/components/Loader/Loader';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setOpen } from '@/store/dataSlice';
+import { RootState } from '@/store/Store';
 import './PersonDetails.scss';
 
 export default function PersonDetails() {
-  const { personId } = useParams();
+  const { page, data, isLoad } = useSelector((state: RootState) => state.data);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { page, data, isLoad, setOpen } = useData();
+  const { personId } = useParams();
   const id = personId ? +personId - 1 : 0;
 
   const handleCloseBtn = () => {
     navigate(`/page/${page}`);
-    setOpen(false);
+    dispatch(setOpen(false));
   };
 
   useEffect(() => {
-    setOpen(true);
+    dispatch(setOpen(true));
   }, []);
 
   return (
