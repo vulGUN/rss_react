@@ -1,40 +1,43 @@
 import CardsService from '@/services/CardsService';
-import { useData } from '@/contexts/DataProvider';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setData, setIsLoad, setPage, setIsNetworkError } from '@/store/dataSlice';
+import { RootState } from '@/store/Store';
 import './Pagination.scss';
 
 const CARDS_SERVICE = new CardsService();
 
 export default function Pagination() {
-  const { data, setData, setIsLoad, page, setPage, setIsNetworkError } = useData();
+  const { data, page } = useSelector((state: RootState) => state.data);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const prevPageFn = async () => {
     if (page > 1 && data.previous) {
-      setIsLoad(true);
+      dispatch(setIsLoad(true));
       try {
         const newData = await CARDS_SERVICE.getNextOrPrevCards(data.previous);
-        setData(newData);
-        setPage((prevState) => prevState - 1);
+        dispatch(setData(newData));
+        dispatch(setPage(page - 1));
       } catch (error) {
-        setIsNetworkError(true);
+        dispatch(setIsNetworkError(true));
       }
-      setIsLoad(false);
+      dispatch(setIsLoad(false));
     }
   };
 
   const nextPageFn = async () => {
     if (page < Math.ceil(data.count / data.results.length) && data.next) {
-      setIsLoad(true);
+      dispatch(setIsLoad(true));
       try {
         const newData = await CARDS_SERVICE.getNextOrPrevCards(data.next);
-        setData(newData);
-        setPage((prevState) => prevState + 1);
+        dispatch(setData(newData));
+        dispatch(setPage(page + 1));
       } catch (error) {
-        setIsNetworkError(true);
+        dispatch(setIsNetworkError(true));
       }
-      setIsLoad(false);
+      dispatch(setIsLoad(false));
     }
   };
 
